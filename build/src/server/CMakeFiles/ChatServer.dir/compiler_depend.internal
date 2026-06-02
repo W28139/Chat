@@ -3,6 +3,7 @@
 
 src/server/CMakeFiles/ChatServer.dir/chatserver.cpp.o
  /home/wevix/Chat_System/src/server/chatserver.cpp
+ /home/wevix/Chat_System/include/public.hpp
  /home/wevix/Chat_System/include/server/chatserver.hpp
  /home/wevix/Chat_System/include/server/chatservice.hpp
  /home/wevix/Chat_System/include/server/model/UserModel.hpp
@@ -12,6 +13,7 @@ src/server/CMakeFiles/ChatServer.dir/chatserver.cpp.o
  /home/wevix/Chat_System/include/server/model/groupuser.hpp
  /home/wevix/Chat_System/include/server/model/offlinemessagemodel.hpp
  /home/wevix/Chat_System/include/server/model/user.hpp
+ /home/wevix/Chat_System/include/server/redis/redis.hpp
  /home/wevix/Chat_System/thirdparty/json.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h
@@ -158,6 +160,7 @@ src/server/CMakeFiles/ChatServer.dir/chatserver.cpp.o
  /usr/include/c++/13/bits/std_abs.h
  /usr/include/c++/13/bits/std_function.h
  /usr/include/c++/13/bits/std_mutex.h
+ /usr/include/c++/13/bits/std_thread.h
  /usr/include/c++/13/bits/stl_algo.h
  /usr/include/c++/13/bits/stl_algobase.h
  /usr/include/c++/13/bits/stl_bvector.h
@@ -182,6 +185,7 @@ src/server/CMakeFiles/ChatServer.dir/chatserver.cpp.o
  /usr/include/c++/13/bits/streambuf_iterator.h
  /usr/include/c++/13/bits/string_view.tcc
  /usr/include/c++/13/bits/stringfwd.h
+ /usr/include/c++/13/bits/this_thread_sleep.h
  /usr/include/c++/13/bits/uniform_int_dist.h
  /usr/include/c++/13/bits/unique_lock.h
  /usr/include/c++/13/bits/unique_ptr.h
@@ -227,6 +231,7 @@ src/server/CMakeFiles/ChatServer.dir/chatserver.cpp.o
  /usr/include/c++/13/iomanip
  /usr/include/c++/13/ios
  /usr/include/c++/13/iosfwd
+ /usr/include/c++/13/iostream
  /usr/include/c++/13/istream
  /usr/include/c++/13/iterator
  /usr/include/c++/13/limits
@@ -249,6 +254,7 @@ src/server/CMakeFiles/ChatServer.dir/chatserver.cpp.o
  /usr/include/c++/13/string
  /usr/include/c++/13/string_view
  /usr/include/c++/13/system_error
+ /usr/include/c++/13/thread
  /usr/include/c++/13/tr1/bessel_function.tcc
  /usr/include/c++/13/tr1/beta_function.tcc
  /usr/include/c++/13/tr1/ell_integral.tcc
@@ -446,10 +452,15 @@ src/server/CMakeFiles/ChatServer.dir/chatserver.cpp.o
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/socket.h
+ /usr/include/x86_64-linux-gnu/sys/time.h
  /usr/include/x86_64-linux-gnu/sys/types.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/local/include/hiredis/alloc.h
+ /usr/local/include/hiredis/hiredis.h
+ /usr/local/include/hiredis/read.h
+ /usr/local/include/hiredis/sds.h
  /usr/local/include/muduo/base/Atomic.h
  /usr/local/include/muduo/base/CurrentThread.h
  /usr/local/include/muduo/base/LogStream.h
@@ -480,6 +491,7 @@ src/server/CMakeFiles/ChatServer.dir/chatservice.cpp.o
  /home/wevix/Chat_System/include/server/model/groupuser.hpp
  /home/wevix/Chat_System/include/server/model/offlinemessagemodel.hpp
  /home/wevix/Chat_System/include/server/model/user.hpp
+ /home/wevix/Chat_System/include/server/redis/redis.hpp
  /home/wevix/Chat_System/thirdparty/json.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h
@@ -625,6 +637,7 @@ src/server/CMakeFiles/ChatServer.dir/chatservice.cpp.o
  /usr/include/c++/13/bits/std_abs.h
  /usr/include/c++/13/bits/std_function.h
  /usr/include/c++/13/bits/std_mutex.h
+ /usr/include/c++/13/bits/std_thread.h
  /usr/include/c++/13/bits/stl_algo.h
  /usr/include/c++/13/bits/stl_algobase.h
  /usr/include/c++/13/bits/stl_bvector.h
@@ -649,6 +662,7 @@ src/server/CMakeFiles/ChatServer.dir/chatservice.cpp.o
  /usr/include/c++/13/bits/streambuf_iterator.h
  /usr/include/c++/13/bits/string_view.tcc
  /usr/include/c++/13/bits/stringfwd.h
+ /usr/include/c++/13/bits/this_thread_sleep.h
  /usr/include/c++/13/bits/uniform_int_dist.h
  /usr/include/c++/13/bits/unique_lock.h
  /usr/include/c++/13/bits/unique_ptr.h
@@ -717,6 +731,7 @@ src/server/CMakeFiles/ChatServer.dir/chatservice.cpp.o
  /usr/include/c++/13/string
  /usr/include/c++/13/string_view
  /usr/include/c++/13/system_error
+ /usr/include/c++/13/thread
  /usr/include/c++/13/tr1/bessel_function.tcc
  /usr/include/c++/13/tr1/beta_function.tcc
  /usr/include/c++/13/tr1/ell_integral.tcc
@@ -914,10 +929,15 @@ src/server/CMakeFiles/ChatServer.dir/chatservice.cpp.o
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/socket.h
+ /usr/include/x86_64-linux-gnu/sys/time.h
  /usr/include/x86_64-linux-gnu/sys/types.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/local/include/hiredis/alloc.h
+ /usr/local/include/hiredis/hiredis.h
+ /usr/local/include/hiredis/read.h
+ /usr/local/include/hiredis/sds.h
  /usr/local/include/muduo/base/LogStream.h
  /usr/local/include/muduo/base/Logging.h
  /usr/local/include/muduo/base/StringPiece.h
@@ -1140,6 +1160,7 @@ src/server/CMakeFiles/ChatServer.dir/db/db.cpp.o
 
 src/server/CMakeFiles/ChatServer.dir/main.cpp.o
  /home/wevix/Chat_System/src/server/main.cpp
+ /home/wevix/Chat_System/include/public.hpp
  /home/wevix/Chat_System/include/server/chatserver.hpp
  /home/wevix/Chat_System/include/server/chatservice.hpp
  /home/wevix/Chat_System/include/server/model/UserModel.hpp
@@ -1149,6 +1170,7 @@ src/server/CMakeFiles/ChatServer.dir/main.cpp.o
  /home/wevix/Chat_System/include/server/model/groupuser.hpp
  /home/wevix/Chat_System/include/server/model/offlinemessagemodel.hpp
  /home/wevix/Chat_System/include/server/model/user.hpp
+ /home/wevix/Chat_System/include/server/redis/redis.hpp
  /home/wevix/Chat_System/thirdparty/json.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h
@@ -1295,6 +1317,7 @@ src/server/CMakeFiles/ChatServer.dir/main.cpp.o
  /usr/include/c++/13/bits/std_abs.h
  /usr/include/c++/13/bits/std_function.h
  /usr/include/c++/13/bits/std_mutex.h
+ /usr/include/c++/13/bits/std_thread.h
  /usr/include/c++/13/bits/stl_algo.h
  /usr/include/c++/13/bits/stl_algobase.h
  /usr/include/c++/13/bits/stl_bvector.h
@@ -1319,6 +1342,7 @@ src/server/CMakeFiles/ChatServer.dir/main.cpp.o
  /usr/include/c++/13/bits/streambuf_iterator.h
  /usr/include/c++/13/bits/string_view.tcc
  /usr/include/c++/13/bits/stringfwd.h
+ /usr/include/c++/13/bits/this_thread_sleep.h
  /usr/include/c++/13/bits/uniform_int_dist.h
  /usr/include/c++/13/bits/unique_lock.h
  /usr/include/c++/13/bits/unique_ptr.h
@@ -1387,6 +1411,7 @@ src/server/CMakeFiles/ChatServer.dir/main.cpp.o
  /usr/include/c++/13/string
  /usr/include/c++/13/string_view
  /usr/include/c++/13/system_error
+ /usr/include/c++/13/thread
  /usr/include/c++/13/tr1/bessel_function.tcc
  /usr/include/c++/13/tr1/beta_function.tcc
  /usr/include/c++/13/tr1/ell_integral.tcc
@@ -1605,13 +1630,20 @@ src/server/CMakeFiles/ChatServer.dir/main.cpp.o
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h
  /usr/include/x86_64-linux-gnu/sys/socket.h
+ /usr/include/x86_64-linux-gnu/sys/time.h
  /usr/include/x86_64-linux-gnu/sys/types.h
  /usr/include/x86_64-linux-gnu/sys/ucontext.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h
+ /usr/local/include/hiredis/alloc.h
+ /usr/local/include/hiredis/hiredis.h
+ /usr/local/include/hiredis/read.h
+ /usr/local/include/hiredis/sds.h
  /usr/local/include/muduo/base/Atomic.h
  /usr/local/include/muduo/base/CurrentThread.h
+ /usr/local/include/muduo/base/LogStream.h
+ /usr/local/include/muduo/base/Logging.h
  /usr/local/include/muduo/base/Mutex.h
  /usr/local/include/muduo/base/StringPiece.h
  /usr/local/include/muduo/base/Timestamp.h

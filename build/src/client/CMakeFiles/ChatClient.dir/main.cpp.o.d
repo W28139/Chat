@@ -311,7 +311,9 @@ src/client/CMakeFiles/ChatClient.dir/main.cpp.o: \
  /usr/include/asm-generic/sockios.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
  /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/bits/in.h \
- /usr/include/arpa/inet.h \
+ /usr/include/arpa/inet.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /usr/include/c++/13/atomic \
  /home/wevix/Chat_System/include/server/model/group.hpp \
  /home/wevix/Chat_System/include/server/model/groupuser.hpp \
  /home/wevix/Chat_System/include/server/model/user.hpp \
