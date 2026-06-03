@@ -10,6 +10,9 @@
 #include <cstring>
 #include "json.hpp" // 确保你有这个头文件
 
+/*
+g++ stress_test.cpp -o stress_test -lpthread -std=c++11
+*/
 using json = nlohmann::json;
 using namespace std;
 
@@ -25,8 +28,8 @@ enum MsgType {
 // 配置信息
 const char* SERVER_IP = "127.0.0.1";
 const int SERVER_PORT = 8000;
-const int THREAD_COUNT = 10;        // 并发线程数
-const int REQUESTS_PER_THREAD = 800; // 每个线程模拟的用户数
+const int THREAD_COUNT = 20;        // 并发线程数
+const int REQUESTS_PER_THREAD = 300; // 每个线程模拟的用户数
 const int START_ID = 1;            // 压测起始 ID (确保数据库里有这些 ID)
 
 atomic<int> success_count(0);

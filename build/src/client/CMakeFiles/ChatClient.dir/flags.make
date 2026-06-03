@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/wevix/Chat_System/include -I/home/wevix/Chat_System/include/server -I/home/wevix/Chat_System/thirdparty -I/home/wevix/Chat_System/include/server/db -I/home/wevix/Chat_System/include/server/model -I/home/wevix/Chat_System/include/server/redis
 
-CXX_FLAGS = -g
+CXX_FLAGS =  -g -Wall -fsanitize=address -fno-omit-frame-pointer -g
 

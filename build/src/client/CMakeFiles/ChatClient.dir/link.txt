@@ -1,1 +1,1 @@
-/usr/bin/c++ -g -rdynamic CMakeFiles/ChatClient.dir/main.cpp.o -o /home/wevix/Chat_System/bin/ChatClient  -lmuduo_net -lmuduo_base -lpthread 
+/usr/bin/c++  -g -Wall -fsanitize=address -fno-omit-frame-pointer -g -rdynamic CMakeFiles/ChatClient.dir/main.cpp.o -o /home/wevix/Chat_System/bin/ChatClient  -lmuduo_net -lmuduo_base -lpthread 

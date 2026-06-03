@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     EventLoop loop;
     InetAddress addr(ip, port);
     ChatServer server(&loop, addr, "ChatServer");
-
+    ChatService::instance();
     server.start();
     loop.loop();
 
