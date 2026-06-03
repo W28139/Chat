@@ -91,6 +91,14 @@ private:
     GroupModel _groupModel;
 
     Redis _redis;
+
+    // 心跳管理：user->最后活跃的时间戳
+    std::unordered_map<int, Timestamp> _userHeartbeatMap;
+    std::mutex _hbMutex;
+
+    // 内部启动 UDP 监听和超时检查的方法
+    void startHeartbeatListener();
+    void checkConnectionTimeout();
 };
 
 #endif

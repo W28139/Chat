@@ -73,9 +73,16 @@ ChatService::ChatService()
         _redis.init_notify_handler(std::bind(&ChatService::handleRedisSubscribeMessage,this,std::placeholders::_1,std::placeholders::_2));
     }
 
+     // 开启一个独立线程运行 UDP 监听器
+    std::thread hbListener(&ChatService::startHeartbeatListener, this);
+    hbListener.detach();
+
+    // 开启一个独立线程运行超时检查器（也可以利用 muduo 的定时器）
+    std::thread hbChecker(&ChatService::checkConnectionTimeout, this);
+    hbChecker.detach();
+
     // 服务器启动，所有用户状态重置为offline
     _userModel.resetState();
-
 }
 
 MsgHandler ChatService::getHandler(int msgid)
@@ -189,6 +196,11 @@ void ChatService::login(const TcpConnectionPtr &conn,json &js,Timestamp time)
             }
 
             conn->send(response.dump());
+            // 初始化心跳
+            {
+                std::lock_guard<std::mutex> lock(_hbMutex);
+                _userHeartbeatMap[js["id"].get<int>()] = Timestamp::now();
+            }
         }
     }
     else if(user.getId()!=id)
@@ -378,4 +390,79 @@ void ChatService::handleRedisSubscribeMessage(int userid,std::string msg)
     }
     // 调用该函数后一瞬间下线了，那就存储离线消息
     _offlineMsgModel.insert(userid,msg);
+}
+
+
+void ChatService::startHeartbeatListener() {
+    int udpFd = socket(AF_INET, SOCK_DGRAM, 0);
+    sockaddr_in addr;
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(8080); // 心跳专用端口
+    addr.sin_addr.s_addr = htonl(INADDR_ANY);
+
+    bind(udpFd, (sockaddr*)&addr, sizeof(addr));
+
+    char buf[128];
+    while (true) 
+    {
+        struct sockaddr_in clientAddr;
+        socklen_t len = sizeof(clientAddr);
+        int n = recvfrom(udpFd, buf, sizeof(buf), 0, (sockaddr*)&clientAddr, &len);
+        if (n > 0) 
+        {
+            try 
+            {
+                auto js = json::parse(buf);
+                int userid = js["id"].get<int>();
+
+                // 更新时间戳
+                std::lock_guard<std::mutex> lock(_hbMutex);
+                _userHeartbeatMap[userid] = Timestamp::now();
+            } catch (...) {}
+        }
+    }
+}
+
+void ChatService::checkConnectionTimeout() {
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        Timestamp now = Timestamp::now();
+
+        std::vector<int> timeoutUsers;
+        {
+            std::lock_guard<std::mutex> lock(_hbMutex);
+            for (auto it = _userHeartbeatMap.begin(); it != _userHeartbeatMap.end(); ) 
+            {
+                // 如果超过 5 秒没收到心跳
+                if (timeDifference(now, it->second) > 5.0) 
+                {
+                    timeoutUsers.push_back(it->first);
+                    it = _userHeartbeatMap.erase(it);
+                } 
+                else 
+                {
+                    ++it;
+                }
+            }
+        }
+
+        // 处理超时用户
+        for (int id : timeoutUsers) 
+        {
+            LOG_INFO << "Heartbeat timeout, user id: " << id;
+            TcpConnectionPtr conn;
+            {
+                std::lock_guard<std::mutex> lock(_connMutex);
+                if (_userConnMap.count(id)) 
+                {
+                    conn = _userConnMap[id];
+                }
+            }
+            if (conn) 
+            {
+                // 强制关闭 TCP 连接，会触发 clientCloseException
+                conn->shutdown(); 
+            }
+        }
+    }
 }

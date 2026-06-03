@@ -20,6 +20,7 @@ src/client/CMakeFiles/ChatClient.dir/main.cpp.o
  /usr/include/c++/13/algorithm
  /usr/include/c++/13/any
  /usr/include/c++/13/array
+ /usr/include/c++/13/atomic
  /usr/include/c++/13/backward/auto_ptr.h
  /usr/include/c++/13/backward/binders.h
  /usr/include/c++/13/bit
@@ -269,6 +270,7 @@ src/client/CMakeFiles/ChatClient.dir/main.cpp.o
  /usr/include/nlohmann/thirdparty/hedley/hedley_undef.hpp
  /usr/include/pthread.h
  /usr/include/sched.h
+ /usr/include/semaphore.h
  /usr/include/stdc-predef.h
  /usr/include/stdint.h
  /usr/include/stdio.h
@@ -316,6 +318,7 @@ src/client/CMakeFiles/ChatClient.dir/main.cpp.o
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
  /usr/include/x86_64-linux-gnu/bits/sched.h
  /usr/include/x86_64-linux-gnu/bits/select.h
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h
  /usr/include/x86_64-linux-gnu/bits/setjmp.h
  /usr/include/x86_64-linux-gnu/bits/sockaddr.h
  /usr/include/x86_64-linux-gnu/bits/socket.h

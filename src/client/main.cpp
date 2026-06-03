@@ -46,6 +46,9 @@ void mainMenu(int clientfd);
 // 接收线程
 void readTaskHandler(int clientfd);
 
+// 在登录成功后，开启一个发送 UDP 包的线程
+void heartbeatHandler(int userId, string ip);
+
 // 聊天客户端程序实现, main线程用作发送线程, 子线程用作接收线程
 int main(int argc, char **argv)
 {
@@ -131,6 +134,9 @@ int main(int argc, char **argv)
 
             if(g_isLoginSuccess)
             {
+                // 开启一个发送 UDP 包的线程
+                std::thread hbThread(heartbeatHandler, g_currentUser.getId(), string(argv[1]));
+                hbThread.detach();
                 isMainMenuRunning = true;
                 mainMenu(clientfd);
             }
@@ -578,3 +584,22 @@ void loginout(int clientfd,string str)
     }
 }
 
+void heartbeatHandler(int userId, string ip) {
+    int udpFd = socket(AF_INET, SOCK_DGRAM, 0);
+    sockaddr_in serverAddr;
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(8080); // 对应 Server 的 UDP 端口
+    serverAddr.sin_addr.s_addr = inet_addr(ip.c_str());
+
+    // 只要处于连接，就死循环发送
+    while (g_isLoginSuccess) {
+        json js;
+        js["id"] = userId;
+        string msg = js.dump();
+        sendto(udpFd, msg.c_str(), msg.size(), 0, (sockaddr*)&serverAddr, sizeof(serverAddr));
+        
+        // 每 1 秒发送一次
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+    close(udpFd);
+}
