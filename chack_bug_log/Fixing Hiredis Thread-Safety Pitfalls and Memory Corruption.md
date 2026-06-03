@@ -102,8 +102,6 @@ bool Redis::publish(int channel, std::string message) {
 
 
 
-
-
 在原版实现中，`Redis` 类仅持有两个固定的 `redisContext`：一个用于发布（Publish），一个用于订阅（Subscribe）。
 
 ### ❌ 致命缺陷：非线程安全导致的崩溃
