@@ -28,8 +28,8 @@ enum MsgType {
 // 配置信息
 const char* SERVER_IP = "127.0.0.1";
 const int SERVER_PORT = 8000;
-const int THREAD_COUNT = 20;        // 并发线程数
-const int REQUESTS_PER_THREAD = 300; // 每个线程模拟的用户数
+const int THREAD_COUNT = 15;        // 并发线程数
+const int REQUESTS_PER_THREAD = 200; // 每个线程模拟的用户数
 const int START_ID = 1;            // 压测起始 ID (确保数据库里有这些 ID)
 
 atomic<int> success_count(0);
@@ -82,7 +82,7 @@ void worker(int start_id, int count) {
                     success_count++;
                     
                     // --- 可选：模拟发送一条私聊消息 ---
-                    /*
+                    
                     json chatjs;
                     chatjs["msgid"] = ONE_CHAT_MSG;
                     chatjs["from"] = current_id;
@@ -90,7 +90,7 @@ void worker(int start_id, int count) {
                     chatjs["msg"] = "hello stress test";
                     string cstr = chatjs.dump();
                     send(clientfd, cstr.c_str(), cstr.size(), 0);
-                    */
+                    
                 } 
                 else {
                     // 可能是账号已登录或密码错误
